@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+
+filebeat:
+    image: docker.elastic.co/beats/filebeat:6.6.0
+    container_name: filebeat
+    user: root
+    environment:
+        - strict.perms=false
+    volumes:
+        - './filebeat.yml:/usr/share/filebeat/filebeat.yml:ro'
+        - '/private/var/services/octopus/filebeat:/usr/share/filebeat/data:rw'
+        - '/private/var/services/octopus/netflower/logs:/usr/share/services/netflower/logs'
+        - '/private/var/services/octopus/execer/logs:/usr/share/services/execer/logs'
